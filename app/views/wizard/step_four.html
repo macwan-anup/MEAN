@@ -1,0 +1,79 @@
+<fieldset>
+    <div class="row" ng-controller="Ctrl">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="form-group" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Highest Education</label>
+
+                    <div class="col-sm-10">
+                        <ui-select ng-model="option.selected" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person">{{$select.selected.text}}</ui-select-match>
+                            <ui-select-choices repeat="item in options | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Occupation</label>
+
+                    <div class="col-sm-10">
+                        <ui-select ng-model="option.selected" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person">{{$select.selected.text}}</ui-select-match>
+                            <ui-select-choices repeat="item in options | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" >
+                    <label class="col-sm-2 control-label">Employed In</label>
+                    <div class="col-sm-10">
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Slim</label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Average </label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Athletic </label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.check8"> Heavy</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" id="data_2" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Job Type</label>
+
+                    <div class="col-sm-10">
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Temporary</label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Permanent </label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Annual Income</label>
+
+                    <div class="col-sm-10">
+                        <ui-select ng-model="option.selected" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person">{{$select.selected.text}}</ui-select-match>
+                            <ui-select-choices repeat="item in options | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+        </div>
+    </div>
+    <a ui-sref="home.details.step_three" class="btn btn-default">Previous</a>
+    <a ui-sref="home.details.step_five" class="btn btn-primary">Next</a>
+</fieldset>

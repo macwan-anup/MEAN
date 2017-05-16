@@ -1,0 +1,84 @@
+<fieldset>
+    <div class="row" ng-controller="Ctrl">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="form-group" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Height</label>
+
+                    <div class="col-sm-10">
+                        <ui-select ng-model="option.selected" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person">{{$select.selected.text}}</ui-select-match>
+                            <ui-select-choices repeat="item in options | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Weight</label>
+
+                    <div class="col-sm-10">
+                        <ui-select ng-model="option.selected" theme="bootstrap">
+                            <ui-select-match placeholder="Select or search a person">{{$select.selected.text}}</ui-select-match>
+                            <ui-select-choices repeat="item in options | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" >
+                    <label class="col-sm-2 control-label">Body Type</label>
+                    <div class="col-sm-10">
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Slim</label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Average </label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Athletic </label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.check8"> Heavy</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row">
+                <div class="form-group" id="data_2" ng-controller="selectCtrl"><label class="col-sm-2 control-label">Complexion</label>
+
+                    <div class="col-sm-10">
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Very Fair</label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Fair </label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.checkFour"> Wheatish </label></div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.check8"> Brown</label>
+                        </div>
+                        <div><label> <input icheck type="radio" name="radioTest"
+                                            ng-model="main.check8"> Dark</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div><div class="row">
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">Physical Status</label>
+                <div class="col-sm-10">
+                    <div><label> <input icheck type="radio" name="radioTest"
+                                        ng-model="main.checkFour"> Normal </label></div>
+                    <div><label> <input icheck type="radio" name="radioTest"
+                                        ng-model="main.checkFour"> Physically Challenged </label></div>
+                </div>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        </div>
+    </div>
+    <a ui-sref="home.details.step_two" class="btn btn-default">Previous</a>
+    <a ui-sref="home.details.step_four" class="btn btn-primary">Next</a>
+</fieldset>

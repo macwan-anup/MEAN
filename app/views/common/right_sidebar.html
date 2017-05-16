@@ -4,10 +4,10 @@
         <ul class="nav nav-tabs navs-3">
 
             <li ng-class="{active: tab1}"><a ng-click="tab1 = true; tab2 = false; tab3 = false" ng-init="tab1 = true">
-                Notes
+                Favorites
             </a></li>
             <li ng-class="{active: tab2}"><a ng-click="tab2 = true; tab1 = false; tab3 = false">
-                Projects
+                Alerts
             </a></li>
             <li ng-class="{active: tab3}"><a ng-click="tab3 = true; tab1 = false; tab2 = false">
                 <i class="fa fa-gear"></i>
@@ -17,8 +17,8 @@
         <div class="tab-content">
             <div class="tab-pane" ng-class="{active: tab1}">
                 <div class="sidebar-title">
-                    <h3> <i class="fa fa-comments-o"></i> Latest Notes</h3>
-                    <small><i class="fa fa-tim"></i> You have 10 new message.</small>
+                    <h3> <i class="fa fa-comments-o"></i> Favorite Members</h3>
+                    <small><i class="fa fa-tim"></i> You have 10 members.</small>
                 </div>
                 <div>
                     <div class="sidebar-message">
@@ -157,7 +157,7 @@
                             <div class="progress progress-mini">
                                 <div style="width: 22%;" class="progress-bar progress-bar-warning"></div>
                             </div>
-                            <div class="small text-muted m-t-xs">Project end: 4:00 pm - 12.06.2014</div>
+                            <div class="small text-muted m-t-xs"><button class="btn btn-primary btn-xs" type="button"><i class="fa fa-check"></i>&nbsp;Accept</button><button style="margin-left: 15px;" class="btn btn-danger btn-xs" type="button"><i class="fa fa-check"></i>&nbsp;Reject</button></div>
                         </a>
                     </li>
                     <li>

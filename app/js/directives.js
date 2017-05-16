@@ -106,6 +106,89 @@ function fullScroll($timeout){
     };
 }
 
+function iboxTools($timeout) {
+    return {
+        restrict: 'A',
+        scope: true,
+        templateUrl: 'views/common/ibox_tools.html',
+        controller: function ($scope, $element) {
+            // Function for collapse ibox
+            $scope.showhide = function () {
+                var ibox = $element.closest('div.ibox');
+                var icon = $element.find('i:first');
+                var content = ibox.children('.ibox-content');
+                content.slideToggle(200);
+                // Toggle icon from up to down
+                icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+                ibox.toggleClass('').toggleClass('border-bottom');
+                $timeout(function () {
+                    ibox.resize();
+                    ibox.find('[id^=map-]').resize();
+                }, 50);
+            };
+            // Function for close ibox
+            $scope.closebox = function () {
+                var ibox = $element.closest('div.ibox');
+                ibox.remove();
+            }
+        }
+    };
+}
+
+function icheck($timeout) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function($scope, element, $attrs, ngModel) {
+            return $timeout(function() {
+                var value;
+                value = $attrs['value'];
+
+                $scope.$watch($attrs['ngModel'], function(newValue){
+                    $(element).iCheck('update');
+                })
+
+                return $(element).iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green'
+
+                }).on('ifChanged', function(event) {
+                    if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
+                        $scope.$apply(function() {
+                            return ngModel.$setViewValue(event.target.checked);
+                        });
+                    }
+                    if ($(element).attr('type') === 'radio' && $attrs['ngModel']) {
+                        return $scope.$apply(function() {
+                            return ngModel.$setViewValue(value);
+                        });
+                    }
+                });
+            });
+        }
+    };
+}
+
+function sparkline() {
+    return {
+        restrict: 'A',
+        scope: {
+            sparkData: '=',
+            sparkOptions: '=',
+        },
+        link: function (scope, element, attrs) {
+            scope.$watch(scope.sparkData, function () {
+                render();
+            });
+            scope.$watch(scope.sparkOptions, function(){
+                render();
+            });
+            var render = function () {
+                $(element).sparkline(scope.sparkData, scope.sparkOptions);
+            };
+        }
+    }
+};
 
 angular
     .module('amst')
@@ -113,4 +196,8 @@ angular
     .directive('landingScrollspy', landingScrollspy)
     .directive('sideNavigation', sideNavigation)
     .directive('minimalizaSidebar',minimalizaSidebar)
-    .directive('fullScroll',fullScroll);
+    .directive('fullScroll',fullScroll)
+    .directive('iboxTools',iboxTools)
+    .directive('icheck',icheck)
+    .directive('sparkline', sparkline)
+;
