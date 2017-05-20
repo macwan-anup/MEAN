@@ -1,0 +1,17 @@
+<div class="lock-word animated fadeInDown">
+    <span class="first-word">MATCH</span><span>MAKING</span>
+</div>
+<div class="middle-box text-center lockscreen animated fadeInDown">
+    <div>
+        <div class="m-b-md">
+            <img alt="image" class="img-circle circle-border" src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
+        </div>
+        <h3>AMST Web-Application</h3>
+        <p>We work hard to help you find the perfect match. Explore the World of AMST.</p>
+        <form class="m-t">
+
+            <button class="btn btn-primary block full-width" ng-if="!auth.isAuthenticated()" ng-click="auth.login()">Log In</button>
+            <button class="btn btn-primary block full-width" ng-if="auth.isAuthenticated()" ui-sref="">Home</button>
+        </form>
+    </div>
+</div>

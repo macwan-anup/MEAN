@@ -1,3 +1,23 @@
 /**
- * Created by anupm on 5/20/2017.
+ * Created by anupm on 5/12/2017.
  */
+//Express
+var express = require('express');
+var app = express();
+
+var path = require('path');
+
+
+// serve angular front end files from root path
+app.use('/', express.static('app'));
+
+// rewrite virtual urls to angular app to enable refreshing of internal pages
+app.get('*', function (req, res, next) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+
+
+app.listen(3000);
+console.log("Server Started.. ");
+console.log("listening on port 3000");

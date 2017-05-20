@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start":"npm run build && node server",
+    "build":"npm run clean && webpack",
+    "clean":"rimraf ./dist/*",
     "dev":"webpack -d",
     "prod":"webpack -p"
   },
