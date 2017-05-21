@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 31:
+/***/ 32:
 /***/ (function(module, exports) {
 
 /**
@@ -70,6 +70,7 @@ function authService($state, angularAuth0, $timeout) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        $state.go('index');
     }
 
     function isAuthenticated() {
@@ -99,7 +100,7 @@ function authService($state, angularAuth0, $timeout) {
  */
 
 
-__webpack_require__(31);
+__webpack_require__(32);
 angular
     .module('AMST')
     .config(config)
@@ -151,7 +152,7 @@ function config(
 
     $httpProvider.interceptors.push('jwtInterceptor');
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
 
     // Comment out the line below to run the app
     // without HTML5 mode (will use hashes in routes)
@@ -164,7 +165,7 @@ function config(
 
     $stateProvider
         .state('index', {
-            url: '/',
+            url: '/login',
             controller: 'IndexCtrl',
             templateUrl: 'views/index.html',
             data: {
@@ -177,6 +178,16 @@ function config(
             controller: 'CallbackController',
             templateUrl: 'views/callback.html',
             data:{pageTitle:'Loading..'}
+        })
+        .state('dashboard',{
+            abstract: true,
+            url: "",
+            templateUrl: "views/common/layout.html"
+        })
+        .state('dashboard.home',{
+            url: "/home",
+            templateUrl: "views/home.html",
+            data: { pageTitle: 'Home' }
         })
     ;
 
@@ -230,14 +241,121 @@ function indexCtrl($scope,authService){
 
 /***/ }),
 
-/***/ 72:
+/***/ 64:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
+function landingScrollspy(){
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.scrollspy({
+                target: '.navbar-fixed-top',
+                offset: 80
+            });
+        }
+    }
+}
+
+angular
+    .module('AMST')
+    .directive('landingScrollspy', landingScrollspy);
+
+/***/ }),
+
+/***/ 65:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
+function minimizeSidebar($timeout) {
+    return {
+        restrict: 'A',
+        template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
+        controller: function ($scope, $element) {
+            $scope.minimalize = function () {
+                $("body").toggleClass("mini-navbar");
+                if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+                    // Hide menu in order to smoothly turn on when maximize menu
+                    $('#side-menu').hide();
+                    // For smoothly turn on menu
+                    setTimeout(
+                        function () {
+                            $('#side-menu').fadeIn(400);
+                        }, 200);
+                } else if ($('body').hasClass('fixed-sidebar')){
+                    $('#side-menu').hide();
+                    setTimeout(
+                        function () {
+                            $('#side-menu').fadeIn(400);
+                        }, 100);
+                } else {
+                    // Remove all inline style from jquery fadeIn function to reset menu state
+                    $('#side-menu').removeAttr('style');
+                }
+            }
+        }
+    };
+};
+
+angular
+    .module('AMST')
+    .directive('minimizeSidebar',minimizeSidebar);
+
+/***/ }),
+
+/***/ 66:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
+function sideNavigation($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            // Call the metsiMenu plugin and plug it to sidebar navigation
+            $timeout(function(){
+                element.metisMenu();
+
+            });
+
+            // Colapse menu in mobile mode after click on element
+            var menuElement = $('#side-menu a:not([href$="\\#"])');
+            menuElement.click(function(){
+                if ($(window).width() < 769) {
+                    $("body").toggleClass("mini-navbar");
+                }
+            });
+
+            // Enable initial fixed sidebar
+            if ($("body").hasClass('fixed-sidebar')) {
+                var sidebar = element.parent();
+                sidebar.slimScroll({
+                    height: '100%',
+                    railOpacity: 0.9,
+                });
+            }
+        }
+    };
+};
+angular
+    .module('AMST')
+    .directive('sideNavigation',sideNavigation);
+
+/***/ }),
+
+/***/ 75:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 78:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -258,18 +376,21 @@ angular
 global.jQuery = __webpack_require__(5);
 global.$ = __webpack_require__(5);
 
-__webpack_require__(72);
+__webpack_require__(75);
 //Requiring the Config File
 __webpack_require__(61);
+//Requiring the Directives
+__webpack_require__(64);
+__webpack_require__(66);
+__webpack_require__(65);
 //Requiring the Controllers
 __webpack_require__(63);
 __webpack_require__(62);
-//Requiring the Directives
 
 //Requiring the Services
-__webpack_require__(31);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+__webpack_require__(32);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ })
 
-},[78]);
+},[81]);

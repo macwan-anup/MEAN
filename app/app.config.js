@@ -55,7 +55,7 @@ function config(
 
     $httpProvider.interceptors.push('jwtInterceptor');
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
 
     // Comment out the line below to run the app
     // without HTML5 mode (will use hashes in routes)
@@ -68,7 +68,7 @@ function config(
 
     $stateProvider
         .state('index', {
-            url: '/',
+            url: '/login',
             controller: 'IndexCtrl',
             templateUrl: 'views/index.html',
             data: {
@@ -81,6 +81,16 @@ function config(
             controller: 'CallbackController',
             templateUrl: 'views/callback.html',
             data:{pageTitle:'Loading..'}
+        })
+        .state('dashboard',{
+            abstract: true,
+            url: "",
+            templateUrl: "views/common/layout.html"
+        })
+        .state('dashboard.home',{
+            url: "/home",
+            templateUrl: "views/home.html",
+            data: { pageTitle: 'Home' }
         })
     ;
 

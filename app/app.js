@@ -19,10 +19,13 @@ global.$ = require('jquery');
 require('./css/animate.css');
 //Requiring the Config File
 require('./app.config');
+//Requiring the Directives
+require('./directives/LandingScrollspy.directive');
+require('./directives/sideNavigation.directive');
+require('./directives/minimizeSidebar.directive');
 //Requiring the Controllers
 require('./controllers/index.controller');
 require('./controllers/callback.controller');
-//Requiring the Directives
-require('./directives/LandingScrollspy.directive');
+
 //Requiring the Services
 require('./services/auth0.service');

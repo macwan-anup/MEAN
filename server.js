@@ -7,9 +7,9 @@ var app = express();
 
 var path = require('path');
 
-
+//app.use(express.static('public'))
 // serve angular front end files from root path
-app.use('/', express.static('app'));
+app.use('/', express.static('app', { redirect: false }));
 
 // rewrite virtual urls to angular app to enable refreshing of internal pages
 app.get('*', function (req, res, next) {

@@ -11,7 +11,7 @@
         <form class="m-t">
 
             <button class="btn btn-primary block full-width" ng-if="!auth.isAuthenticated()" ng-click="auth.login()">Log In</button>
-            <button class="btn btn-primary block full-width" ng-if="auth.isAuthenticated()" ui-sref="">Home</button>
+            <button class="btn btn-primary block full-width" ng-if="auth.isAuthenticated()" ui-sref="dashboard.home">Home</button>
         </form>
     </div>
 </div>

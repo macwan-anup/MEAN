@@ -14,8 +14,9 @@ module.exports = {
             './js/global.js',
             'jquery',
             'jquery-ui',
+            'angular',
             'bootstrap',
-            'metismenu',
+            'metisMenu',
             'jquery-slimscroll',
             './js/plugins/pace/pace.min.js',
             './js/inspinia.js',
@@ -28,7 +29,7 @@ module.exports = {
         ]
     },
     output:{
-        path: __dirname ,
+        path: __dirname+'/app' ,
         filename:'[name].bundle.js'
     },
     module:{
@@ -59,17 +60,6 @@ module.exports = {
         ]
     },
     plugins:[
-        new HtmlWebpackPlugin({
-            title: 'AMST',
-            hash:true,
-            template:'./../template.html',
-            filename:'./index.html',
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true,
-                removeAttributeQuotes: true
-            }
-        }),
         new ExtractTextPlugin({
             filename: 'amst.css',
             allChunks: true
