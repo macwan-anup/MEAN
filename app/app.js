@@ -26,6 +26,10 @@ require('./directives/minimizeSidebar.directive');
 //Requiring the Controllers
 require('./controllers/index.controller');
 require('./controllers/callback.controller');
+require('./controllers/dashboard.controller');
+require('./controllers/home.controller');
 
 //Requiring the Services
 require('./services/auth0.service');
+require('./services/userAuth.service');
+require('./services/data.service');

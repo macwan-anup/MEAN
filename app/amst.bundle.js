@@ -59,10 +59,12 @@ function authService($state, angularAuth0, $timeout) {
 
     function setSession(authResult) {
         // Set the time that the access token will expire at
+console.log(authResult);
         var expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
+        localStorage.setItem('amst_user', authResult.idTokenPayload.sub);
     }
 
     function logout() {
@@ -70,6 +72,7 @@ function authService($state, angularAuth0, $timeout) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('amst_user');
         $state.go('index');
     }
 
@@ -182,10 +185,12 @@ function config(
         .state('dashboard',{
             abstract: true,
             url: "",
-            templateUrl: "views/common/layout.html"
+            templateUrl: "views/common/layout.html",
+            controller: 'DashboardCtrl'
         })
         .state('dashboard.home',{
             url: "/home",
+            controller: 'HomeCtrl',
             templateUrl: "views/home.html",
             data: { pageTitle: 'Home' }
         })
@@ -224,6 +229,62 @@ function callbackController() {}
 /**
  * Created by anupm on 5/20/2017.
  */
+angular
+    .module('AMST')
+    .controller('DashboardCtrl', dashboardCtrl);
+
+dashboardCtrl.$inject = [
+    '$scope',
+    'userAuthService',
+    '$state'
+];
+function dashboardCtrl($scope,userAuthService,$state) {
+    $scope.userAuth = userAuthService;
+
+    if(!userAuthService.userExist()){
+        $state.go('index');
+    }
+}
+
+/***/ }),
+
+/***/ 64:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
+angular
+    .module('AMST')
+    .controller('HomeCtrl', HomeCtrl);
+
+HomeCtrl.$inject = [
+    '$scope',
+    'dataService'
+];
+function HomeCtrl($scope,dataService) {
+    $scope.pingPublic = function(){
+        dataService.public(function(data){
+            console.log(data);
+        })
+    };
+
+    $scope.pingPrivate = function(){
+        dataService.private(function(data){
+            console.log(data);
+        })
+    };
+
+}
+
+/***/ }),
+
+/***/ 65:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
 
 
 angular
@@ -241,7 +302,7 @@ function indexCtrl($scope,authService){
 
 /***/ }),
 
-/***/ 64:
+/***/ 66:
 /***/ (function(module, exports) {
 
 /**
@@ -265,7 +326,7 @@ angular
 
 /***/ }),
 
-/***/ 65:
+/***/ 67:
 /***/ (function(module, exports) {
 
 /**
@@ -307,7 +368,7 @@ angular
 
 /***/ }),
 
-/***/ 66:
+/***/ 68:
 /***/ (function(module, exports) {
 
 /**
@@ -348,14 +409,74 @@ angular
 
 /***/ }),
 
-/***/ 75:
+/***/ 72:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
+
+
+angular
+    .module('AMST')
+    .service('dataService', dataService);
+
+dataService.$inject = [
+    '$http'
+];
+
+function dataService($http){
+    this.public = function (callbackFunc) {
+        $http.get('http://localhost:3001/api/public').then(function(result) {
+            callbackFunc(result.data.message);
+        }, function(error) {
+            console.log(error);
+        });
+    };
+
+    this.private = function (callbackFunc) {
+        $http.get('http://localhost:3001/api/private').then(function(result) {
+            callbackFunc(result.data.message);
+        }, function(error) {
+            console.log(error);
+        });
+    };
+}
+
+/***/ }),
+
+/***/ 73:
+/***/ (function(module, exports) {
+
+/**
+ * Created by anupm on 5/20/2017.
+ */
+
+
+angular
+    .module('AMST')
+    .service('userAuthService', userAuthService);
+
+userAuthService.$inject = [
+
+];
+
+function userAuthService(){
+    this.userExist = function () {
+        return localStorage.getItem('amst_user') !== null ;
+    };
+}
+
+/***/ }),
+
+/***/ 79:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 81:
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -376,21 +497,25 @@ angular
 global.jQuery = __webpack_require__(5);
 global.$ = __webpack_require__(5);
 
-__webpack_require__(75);
+__webpack_require__(79);
 //Requiring the Config File
 __webpack_require__(61);
 //Requiring the Directives
-__webpack_require__(64);
 __webpack_require__(66);
-__webpack_require__(65);
+__webpack_require__(68);
+__webpack_require__(67);
 //Requiring the Controllers
-__webpack_require__(63);
+__webpack_require__(65);
 __webpack_require__(62);
+__webpack_require__(63);
+__webpack_require__(64);
 
 //Requiring the Services
 __webpack_require__(32);
+__webpack_require__(73);
+__webpack_require__(72);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ })
 
-},[81]);
+},[85]);

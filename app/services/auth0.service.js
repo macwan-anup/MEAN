@@ -54,10 +54,12 @@ function authService($state, angularAuth0, $timeout) {
 
     function setSession(authResult) {
         // Set the time that the access token will expire at
+console.log(authResult);
         var expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
+        localStorage.setItem('amst_user', authResult.idTokenPayload.sub);
     }
 
     function logout() {
@@ -65,6 +67,7 @@ function authService($state, angularAuth0, $timeout) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('amst_user');
         $state.go('index');
     }
 

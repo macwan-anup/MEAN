@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "api":"npm-run-all --parallel start apionly",
+    "apionly":"node api",
     "start":"npm run build && node server",
     "build":"npm run clean && webpack",
     "clean":"rimraf ./dist/*",

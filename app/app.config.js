@@ -85,10 +85,12 @@ function config(
         .state('dashboard',{
             abstract: true,
             url: "",
-            templateUrl: "views/common/layout.html"
+            templateUrl: "views/common/layout.html",
+            controller: 'DashboardCtrl'
         })
         .state('dashboard.home',{
             url: "/home",
+            controller: 'HomeCtrl',
             templateUrl: "views/home.html",
             data: { pageTitle: 'Home' }
         })

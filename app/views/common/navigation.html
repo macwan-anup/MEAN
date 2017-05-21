@@ -4,13 +4,13 @@
             <li class="nav-header">
 
                 <div class="profile-element" uib-dropdown>
-                    <img alt="image" class="img-circle" ng-src="{{currentUser.profile_img}}"/>
+                    <img alt="image" class="img-circle" ng-src="{{'img/profile_small.jpg'}}"/>
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{currentUser.name}}</strong>
+                                    <strong class="font-bold">{{'Anup Macwan'}}</strong>
                              </span>
-                                <span class="text-muted text-xs block">{{currentUser.amst_ranking}} <b class="caret"></b></span>
+                                <span class="text-muted text-xs block">{{'Novice'}} <b class="caret"></b></span>
                             </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
@@ -47,8 +47,6 @@
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_3">{{ 'Image Request' }}</a></li>
                 </ul>
             </li>
-
         </ul>
-
     </div>
 </nav>
